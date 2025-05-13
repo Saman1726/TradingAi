@@ -1,0 +1,29 @@
+.navbar {
+    background-color: #343a40;
+    padding: 1rem;
+
+    .navbar-brand {
+        color: #ffffff;
+        font-size: 1.5rem;
+        text-decoration: none;
+
+        &:hover {
+            color: #f8f9fa;
+        }
+    }
+
+    .navbar-nav {
+        .nav-item {
+            margin-left: 1rem;
+
+            .nav-link {
+                color: #ffffff;
+                text-decoration: none;
+
+                &:hover {
+                    color: #f8f9fa;
+                }
+            }
+        }
+    }
+}
