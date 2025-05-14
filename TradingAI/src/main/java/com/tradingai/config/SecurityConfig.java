@@ -1,23 +1,29 @@
+package com.tradingai.config;
+
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration
-@EnableWebSecurity
-@EnableResourceServer
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/api/public/**").permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/api/public/**").permitAll() // Public endpoints
+                .anyRequest().authenticated() // All other endpoints require authentication
                 .and()
-            .oauth2ResourceServer()
-                .jwt();
+                .oauth2Login() // Enable OAuth2 login
+                .defaultSuccessUrl("/api/private/welcome", true) // Redirect after successful login
+                .and()
+                .oauth2ResourceServer()
+                .jwt(); // Enable JWT validation for resource server
+        return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return web -> web.ignoring().antMatchers("/api/public/**");
     }
 }
