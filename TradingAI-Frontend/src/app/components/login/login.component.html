@@ -1,0 +1,8 @@
+<div class="login-container">
+  <h1>Login</h1>
+  <button *ngIf="!isLoggedIn" (click)="login()">Login with Google</button>
+  <div *ngIf="isLoggedIn">
+    <p>Welcome, {{ userName }}</p>
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>
