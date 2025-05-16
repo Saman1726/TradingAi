@@ -1,6 +1,9 @@
 .navbar {
-    background-color: #343a40;
+    background-color: #ffffff;
     padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .navbar-brand {
         color: #ffffff;
@@ -12,16 +15,38 @@
         }
     }
 
-    .navbar-nav {
-        .nav-item {
-            margin-left: 1rem;
+    .navbar-toggler {
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 1.5rem;
+        cursor: pointer;
 
-            .nav-link {
-                color: #ffffff;
-                text-decoration: none;
+        &:focus {
+            outline: none;
+        }
+    }
 
-                &:hover {
-                    color: #f8f9fa;
+    .navbar-collapse {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &.show {
+            display: flex;
+        }
+
+        .navbar-nav {
+            .nav-item {
+                margin: 0.5rem 0;
+
+                .nav-link {
+                    color: #ffffff;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #f8f9fa;
+                    }
                 }
             }
         }

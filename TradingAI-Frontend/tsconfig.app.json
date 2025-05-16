@@ -11,5 +11,8 @@
   "include": [
     "src/**/*.d.ts",
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts" // 👈 EXCLUDE all test files
   ]
 }

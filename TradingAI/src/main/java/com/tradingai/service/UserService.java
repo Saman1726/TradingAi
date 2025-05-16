@@ -17,6 +17,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
     public User processOAuth2User(OAuth2User oAuth2User) {
         // Extract user information from OAuth2User
         String username = oAuth2User.getAttribute("login"); // For GitHub, "login" is the username

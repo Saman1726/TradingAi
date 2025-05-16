@@ -1,0 +1,7 @@
+com/tradingai/repository/UserRepository.class
+com/tradingai/controller/AuthController.class
+com/tradingai/service/UserService.class
+com/tradingai/model/User.class
+com/tradingai/config/SecurityConfig.class
+com/tradingai/controller/ApiController.class
+com/tradingai/TradingAiApplication.class

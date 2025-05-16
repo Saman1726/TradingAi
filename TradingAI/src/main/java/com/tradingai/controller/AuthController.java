@@ -17,7 +17,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/api/private/welcome")
+    @GetMapping("/api/login")
     public String welcome(@AuthenticationPrincipal OAuth2User oAuth2User) {
         // Process the OAuth2User and register or retrieve the user
         User user = userService.processOAuth2User(oAuth2User);

@@ -1,0 +1,7 @@
+<button mat-button [matMenuTriggerFor]="menu">☰</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="navigateToExternal('https://gharaboroun.com')">Home</button>
+  <button mat-menu-item (click)="navigateTo('/protected')">CITES</button>
+  <button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">Logout ({{ userName }})</button>
+  <button mat-menu-item *ngIf="!isLoggedIn" (click)="login()">Login</button>
+</mat-menu>

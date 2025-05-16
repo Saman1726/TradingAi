@@ -1,0 +1,81 @@
+/* filepath: /Users/saman/TradingAi/TradingAI-Frontend/src/app/components/protected/protected.component.scss */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  margin: 0;
+  background-color: #e9ecef; /* Light gray background for the page */
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+form {
+  max-width: 400px; /* Smaller form width */
+  width: 100%; /* Ensure the form takes up the container width */
+  margin: 0 auto; /* Center horizontally */
+  padding: 2rem; /* Add padding inside the form */
+  background-color: #f8f9fa; /* Flat gray background */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between form elements */
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc; /* Input border */
+  border-radius: 4px; /* Rounded corners for inputs */
+  background-color: #ffffff; /* White background for inputs */
+}
+
+fieldset {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px; /* Rounded corners for fieldset */
+}
+
+button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px; /* Rounded corners for button */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+div {
+  color: red;
+  font-size: 0.875rem;
+  text-align: left; /* Align error messages to the left */
+}
+
+h1 {
+  text-align: center; /* Center the title */
+  margin-bottom: 1rem; /* Space below the title */
+}
