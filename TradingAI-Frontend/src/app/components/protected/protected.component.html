@@ -33,12 +33,12 @@
       </div>
     </div>
 
-    <fieldset formGroupName="address">
+    <fieldset class="address-fieldset">
       <legend>Address</legend>
       <div>
         <label for="street">Street:</label>
         <input id="street" formControlName="street" />
-        <div *ngIf="registrationForm.get('address.street')?.invalid && registrationForm.get('address.street')?.touched">
+        <div *ngIf="registrationForm.get('street')?.invalid && registrationForm.get('street')?.touched">
           Street is required.
         </div>
       </div>
@@ -46,7 +46,7 @@
       <div>
         <label for="city">City:</label>
         <input id="city" formControlName="city" />
-        <div *ngIf="registrationForm.get('address.city')?.invalid && registrationForm.get('address.city')?.touched">
+        <div *ngIf="registrationForm.get('city')?.invalid && registrationForm.get('city')?.touched">
           City is required.
         </div>
       </div>
@@ -54,7 +54,7 @@
       <div>
         <label for="state">State:</label>
         <input id="state" formControlName="state" />
-        <div *ngIf="registrationForm.get('address.state')?.invalid && registrationForm.get('address.state')?.touched">
+        <div *ngIf="registrationForm.get('state')?.invalid && registrationForm.get('state')?.touched">
           State is required.
         </div>
       </div>
@@ -62,7 +62,7 @@
       <div>
         <label for="zip">Zip Code:</label>
         <input id="zip" formControlName="zip" />
-        <div *ngIf="registrationForm.get('address.zip')?.invalid && registrationForm.get('address.zip')?.touched">
+        <div *ngIf="registrationForm.get('zip')?.invalid && registrationForm.get('zip')?.touched">
           Enter a valid 5-digit zip code.
         </div>
       </div>
