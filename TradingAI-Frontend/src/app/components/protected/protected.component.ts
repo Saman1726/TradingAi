@@ -12,9 +12,9 @@ export class ProtectedComponent {
   registrationForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private registrationService: RegistrationService,
-    private oauthService: OAuthService // Inject OAuthService
+    private readonly fb: FormBuilder,
+    private readonly registrationService: RegistrationService,
+    private readonly oauthService: OAuthService // Inject OAuthService
   ) {
     this.registrationForm = this.fb.group({
       firstName: ["", [Validators.required]],

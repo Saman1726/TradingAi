@@ -1,35 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private readonly userUrl = `${environment.apiUrl}/public/login`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { username, password }, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  getUser(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
     });
-  }
-
-  logout(): void {
-    localStorage.removeItem('access_token');
-  }
-
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('access_token');
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('access_token');
-  }
-
-  saveToken(token: string): void {
-    localStorage.setItem('access_token', token);
+    return this.http.get<any>(this.userUrl, { headers });
   }
 }
