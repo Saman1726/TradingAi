@@ -1,6 +1,7 @@
 package com.tradingai.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +19,14 @@ public class ApiController {
         this.userService = userService;
     }
 
-    @GetMapping("/status")
-    public String getStatus() {
-        return "TradingAI API is running";
-    }
-
     @PostMapping("/registration")
-    public String registerUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@RequestBody User user, AuthenticationPrincipal oAuth2User) {
+         if(oAuth2User == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
         // Save the user to the database
-        userService.saveUser(user);
-        return "User registered successfully";
+        User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(savedUser);
     }
 
 }

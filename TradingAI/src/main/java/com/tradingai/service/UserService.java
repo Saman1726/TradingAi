@@ -17,8 +17,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) {
+       return userRepository.save(user);
     }
 
     public User processOAuth2User(OAuth2User oAuth2User) {
