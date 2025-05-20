@@ -1,24 +1,26 @@
 package com.tradingai.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.Customizer;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors() // <-- This enables CORS with your WebMvcConfigurer
-                .and()
+                .cors(Customizer.withDefaults()) // <-- This enables CORS with your WebMvcConfigurer
+                .csrf(csrf -> csrf.disable()) 
                 .authorizeRequests()
-                .antMatchers("/api/public/**", "/error").permitAll() // <-- add "/error"
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // <-- Add this line
+                .antMatchers("/api/public/**", "/error", "/error/**").permitAll() // <-- add "/error/**"
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer()
@@ -29,17 +31,8 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        // Example: Use "roles" claim from JWT as authorities
-        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            Object roles = jwt.getClaims().get("roles");
-            if (roles instanceof Collection<?>) {
-                ((Collection<?>) roles).forEach(role ->
-                    authorities.add(new SimpleGrantedAuthority("ROLE_" + role))
-                );
-            }
-            return authorities;
-        });
+       
         return converter;
     }
+
 }
