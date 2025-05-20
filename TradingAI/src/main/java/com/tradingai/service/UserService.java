@@ -21,21 +21,17 @@ public class UserService {
        return userRepository.save(user);
     }
 
-    public User processOAuth2User(OAuth2User oAuth2User) {
-        // Extract user information from OAuth2User
-        String username = oAuth2User.getAttribute("login"); // For GitHub, "login" is the username
-        String email = oAuth2User.getAttribute("email");
+    public User findByEmail(String email) {
 
         // Check if the user already exists in the database
-        Optional<User> existingUser = userRepository.findByUsername(username);
+        Optional<User> existingUser = userRepository.findByEmail(email);
         if (existingUser.isPresent()) {
             return existingUser.get();
         }
 
         // If the user doesn't exist, register a new user
         User newUser = new User();
-        newUser.setUsername(username);
         newUser.setEmail(email);
-        return userRepository.save(newUser);
+        return newUser;
     }
 }

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.tradingai.model.User;
-import com.tradingai.service.GoogleVerifierService;
 import com.tradingai.service.UserService;
 
 @RestController
@@ -22,11 +20,9 @@ public class ApiController {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
     private final UserService userService;
-    private final GoogleVerifierService googleVerifierService;
 
-    public ApiController(UserService userService, GoogleVerifierService googleVerifierService) {
+    public ApiController(UserService userService) {
         this.userService = userService;
-        this.googleVerifierService = googleVerifierService;
     }
 
     @PostMapping("/registration")
@@ -38,10 +34,19 @@ public class ApiController {
 
         String email = jwt.getClaim("email");
         String name = jwt.getClaim("name");
-
-        user.setEmail(email);
-        user.setUsername(name);
-        userService.saveUser(user);
+        User userObject = userService.findByEmail(email);
+        userObject.setEmail(email);
+        userObject.setUsername(name);
+        userObject.setPassword(user.getPassword());
+        userObject.setFirstName(user.getFirstName());
+        userObject.setLastName(user.getLastName());
+        userObject.setPhone(user.getPhone());
+        userObject.setStreet(user.getStreet());
+        userObject.setCity(user.getCity());
+        userObject.setState(user.getState());
+        userObject.setZip(user.getZip());
+    
+        userService.saveUser(userObject);
         logger.debug("Logged in User: {}", name);
         return ResponseEntity.ok(user);
 

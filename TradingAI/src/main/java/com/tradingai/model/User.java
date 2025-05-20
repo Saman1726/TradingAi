@@ -10,6 +10,7 @@ public class User {
     private Long id;
     private String username; // Username field
     private String password; // Password field
+    @Column(unique = true) // Ensures email is unique
     private String email;    // Email field
     private String firstName;
     private String lastName;
