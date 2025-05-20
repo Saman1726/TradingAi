@@ -3,6 +3,9 @@ package com.tradingai.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +17,7 @@ import com.tradingai.DTO.TokenRequest;
 
 // Add these imports for GoogleIdToken and related classes
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-
+import com.nimbusds.jwt.JWT;
 // Import GoogleVerifierService
 import com.tradingai.service.GoogleVerifierService;
 
@@ -31,28 +34,22 @@ public class AuthController {
     }
 
     @PostMapping("/api/public/login")
-    public ResponseEntity<User> login(@RequestBody TokenRequest tokenRequest) {
-        GoogleIdToken idToken;
-        try {
-            idToken = googleVerifierService.verify(tokenRequest.getToken());
-        } catch (Exception e) {
-            logger.error("Error verifying token: {}" , e.getMessage());
+    public ResponseEntity<User> login(@AuthenticationPrincipal Jwt jwt) {
+
+        if (jwt == null ) {
+            logger.error("Token is null");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
-        if (idToken != null) {
-            GoogleIdToken.Payload payload = idToken.getPayload();
-            String email = payload.getEmail();
-            String name = (String) payload.get("name");
+        String email = jwt.getClaim("email");
+        String name = jwt.getClaim("name");
 
-            User user = new User();
-            user.setEmail(email);
-            user.setUsername(name);
-            userService.saveUser(user);
-            logger.debug("Logged in User: {}" , name);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(name);
+        userService.saveUser(user);
+        logger.debug("Logged in User: {}", name);
+        return ResponseEntity.ok(user);
+
     }
 }
