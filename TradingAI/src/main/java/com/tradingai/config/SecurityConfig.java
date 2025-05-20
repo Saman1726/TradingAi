@@ -11,20 +11,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
-import javax.crypto.spec.SecretKeySpec;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-     @Value("${google.client-secret}")
+    @Value("${google.client-secret}")
     private String googleClientSecret;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(Customizer.withDefaults()) // <-- This enables CORS with your WebMvcConfigurer
-                .csrf(csrf -> csrf.disable()) 
+                .csrf(csrf -> csrf.disable())
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // <-- Add this line
                 .anyRequest().authenticated()
@@ -36,14 +34,12 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-       
-        return converter;
+        return new JwtAuthenticationConverter();
     }
 
     @Bean
     public NimbusJwtDecoder jwtDecoder() {
-    
+
         return NimbusJwtDecoder.withJwkSetUri("https://www.googleapis.com/oauth2/v3/certs").build();
     }
 
