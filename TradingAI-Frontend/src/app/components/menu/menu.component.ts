@@ -36,6 +36,7 @@ export class MenuComponent {
 
   // Initiates the login flow
   login(): void {
+    this.router.navigate(['routes/login']); // Navigate to the login route
     this.oauthService.initLoginFlow();
   }
 

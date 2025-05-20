@@ -15,6 +15,10 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<any>(this.userUrl, { headers });
+    return this.http.get(this.userUrl, { headers });
+  }
+
+  loginWithGoogle(idToken: string): Observable<any> {
+    return this.http.post(this.userUrl, { token: idToken });
   }
 }

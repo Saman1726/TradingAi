@@ -51,7 +51,7 @@ export class LoginComponent {
   fetchUser() {
     const token = this.oauthService.getIdToken();
     if (token) {
-      this.authService.getUser(token).subscribe({
+      this.authService.loginWithGoogle(token).subscribe({
         next: (user) => this.user = user,
         error: (err) => console.error('Failed to fetch user:', err)
       });
