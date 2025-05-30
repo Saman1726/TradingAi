@@ -1,8 +1,11 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://api.tradingai.com', // Production API URL
+  production: false,
+  apiUrl: 'http://backend:8080/api', // Base URL for the API
   oauth2: {
-    redirectUri: 'http://localhost:8080/login/oauth2/code/google',
-    scope: 'read write'
+    scope: 'read write',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+    clientId: '154400877371-s68r5nv4vd1qllo5jqd0fm8ihqgfna17.apps.googleusercontent.com', 
+    clientSecret: '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', // Replace with your actual client secret
   }
 };
