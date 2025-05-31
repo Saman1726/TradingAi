@@ -5,8 +5,8 @@ services:
     build:
       context: ./TradingAI-Frontend
       dockerfile: Dockerfile
-    ports:
-      - "4200:80"
+    expose:
+      - "80"
     depends_on:
       - backend
 
