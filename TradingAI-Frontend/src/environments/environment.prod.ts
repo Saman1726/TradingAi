@@ -1,5 +1,6 @@
 export const environment = {
-  production: false,
+  production: true,
+  apiBaseUrl: 'https://register-gharaboroun.com/api', // Base URL for the API
   apiUrl: 'http://backend:8080/api', // Base URL for the API
   oauth2: {
     scope: 'read write',

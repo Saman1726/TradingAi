@@ -28,6 +28,7 @@ export class LoginComponent {
   }
 
   login() {
+    window.location.href = 'https://register-gharaboroun.com/login';
     // Initiates the login flow
     this.oauthService.initLoginFlow();
   }
