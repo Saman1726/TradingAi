@@ -50,6 +50,7 @@ services:
       - backend
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
 
 volumes:
   db_data:
