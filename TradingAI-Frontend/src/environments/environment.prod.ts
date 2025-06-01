@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://backend:8080/api', // Base URL for the API
+  apiUrl: '/api', // Base URL for the API
   oauth2: {
     scope: 'read write',
     tokenEndpoint: 'https://oauth2.googleapis.com/token',
