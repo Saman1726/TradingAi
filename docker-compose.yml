@@ -52,6 +52,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - /dev/null:/etc/nginx/conf.d/default.conf
+      - ./TradingAI-Frontend/dist/TradingAI-Frontend:/usr/share/nginx/html:ro
 
 volumes:
   db_data:
