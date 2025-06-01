@@ -1,25 +1,26 @@
 .navbar {
     background-color: #ffffff;
-    padding: 0.5rem 1rem; // Reduced vertical padding
+    padding: 0.5rem 1rem;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column; // Stack items vertically
+    align-items: center;    // Center horizontally
 
     .navbar-brand {
         display: flex;
         align-items: center;
-        justify-content: center; // Center content horizontally
-        color: #333333; // Use a darker color for visibility on white
-        font-size: 1.1rem; // Smaller font size
+        justify-content: center;
+        color: #333333;
+        font-size: 1.1rem;
         text-decoration: none;
-        width: 100%; // Take full width to allow centering
+        width: 100%;
+        margin-bottom: 0.5rem; // Add space below logo
 
         img {
-            height: 80px;         // Set desired height
-            width: auto;          // Let width scale automatically
-            max-width: 450px;     // Optional: prevent it from being too wide
-            object-fit: contain;  // Preserve aspect ratio
-            margin-right: 0rem; // Optional: space after logo
+            height: 80px;
+            width: auto;
+            max-width: 450px;
+            object-fit: contain;
+            margin-right: 0rem;
         }
 
         .navbar-icon {
@@ -39,7 +40,7 @@
         background: none;
         border: none;
         color: #333333;
-        font-size: 1.1rem; // Smaller toggler
+        font-size: 1.1rem;
         cursor: pointer;
 
         &:focus {
@@ -50,19 +51,22 @@
     .navbar-collapse {
         display: none;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; // Center menu items
 
         &.show {
             display: flex;
         }
 
         .navbar-nav {
+            flex-direction: column;
+            align-items: center;
+
             .nav-item {
-                margin: 0.25rem 0; // Less vertical space
+                margin: 0.25rem 0;
 
                 .nav-link {
                     color: #333333;
-                    font-size: 1rem; // Smaller nav links
+                    font-size: 1rem;
                     text-decoration: none;
 
                     &:hover {
