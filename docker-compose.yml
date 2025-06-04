@@ -14,8 +14,6 @@ services:
     build:
       context: ./TradingAI
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
     depends_on:
       - db
     logging:
@@ -31,8 +29,6 @@ services:
 
   db:
     image: postgres:13
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_USER: ${username}
       POSTGRES_PASSWORD: ${password}
